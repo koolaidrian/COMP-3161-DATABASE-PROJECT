@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MealPlanner</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="assets/css/Header-Dark-1.css">
+    <link rel="stylesheet" href="assets/css/Header-Dark.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Multi-step-form.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <!-- Start: Navigation with Button -->
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container"><a class="navbar-brand" href="index.html">MealPlanner</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="MealPlan.html">MyMealPlan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Meals.html">Meals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="KitchenInventory.html">Inventory</a></li>
+                </ul><span class="navbar-text actions"> <a class="login" href="Login.html">Log out</a></span>
+            </div>
+        </div>
+    </nav><!-- End: Navigation with Button -->
+    <div class="col"></div><!-- Start: Multi step form -->
+    <section style="color: #222222;">
+        <div id="multple-step-form-n" class="container overflow-hidden" style="margin-top: 0px;margin-bottom: 10px;padding-bottom: 300px;padding-top: 57px;">
+            <div id="progress-bar-button" class="multisteps-form">
+                <div class="row">
+                    <div class="col-12 col-lg-8 ml-auto mr-auto mb-4">
+                        <div class="multisteps-form__progress"><a class="btn multisteps-form__progress-btn js-active" role="button" title="Meal Info">Meal Info</a><a class="btn multisteps-form__progress-btn" role="button" title="Recipe Ingredients">Recipe Ingredients</a><a class="btn multisteps-form__progress-btn" role="button" title="Recipe Instructions">Recipe Instructions&nbsp;</a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="multistep-start-row" class="row">
+                <div id="multistep-start-column" class="col-12 col-lg-8 m-auto">
+                    <form id="main-form" class="multisteps-form__form" style="height: 155px;margin-bottom: 9px;">
+                        <div id="single-form-next" class="multisteps-form__panel shadow p-4 rounded bg-white js-active" data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">Meal Info</h3>
+                            <div id="form-content" class="multisteps-form__content">
+                                <div id="input-grp-double" class="form-row mt-4">
+                                    <div class="col-12 col-sm-7"><input class="form-control multisteps-form__input" type="text" placeholder="Meal Name"></div>
+                                    <div class="col-12 col-sm-5 mt-4 mt-sm-0"><select class="form-control multisteps-form__input">
+                                            <optgroup label="Meal Type Group">
+                                                <option value="breakfast" selected="">Breakfast</option>
+                                                <option value="lunch">Lunch</option>
+                                                <option value="dinner">Dinner</option>
+                                            </optgroup>
+                                        </select></div>
+                                </div>
+                                <div id="input-grp-single" class="form-row mt-4">
+                                    <div class="col-12"><textarea class="form-control" name="mealDesc" placeholder="Meal Description"></textarea></div>
+                                </div>
+                                <div id="input-grp-single" class="form-row mt-4">
+                                    <div class="col-12"><label>Meal Image</label><input class="form-control-file" type="file"></div>
+                                </div>
+                                <div id="next-button" class="button-row d-flex mt-4"><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn" style="height: 488.6px;">
+                            <h3 class="text-center multisteps-form__title">Recipe Ingredients</h3>
+                            <div id="form-content-1" class="multisteps-form__content">
+                                <div id="input-grp-double-1" class="form-row mt-4">
+                                    <div class="col-12 col-sm-4"><input class="form-control multisteps-form__input" type="number" name="ingredient-qty" placeholder="Quantity"></div>
+                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0"><select class="form-control multisteps-form__input" name="ingredients-measurement" placeholder="measurement">
+                                            <optgroup label="Measurements">
+                                                <option value="cup" selected="">Cup</option>
+                                                <option value="Table Spoon">Table Spoon</option>
+                                                <option value="Tea Spoon">Tea Spoon</option>
+                                            </optgroup>
+                                        </select></div>
+                                    <div class="col-12 col-sm-4 mt-4 mt-sm-0"><select class="form-control multisteps-form__input" name="ingredients-name" placeholder="ingredients name">
+                                            <optgroup label="Ingredients-name">
+                                                <option value="Egg" selected="">Egg</option>
+                                                <option value="Bacon">Bacon</option>
+                                                <option value="Cheese">Cheese</option>
+                                            </optgroup>
+                                        </select></div>
+                                </div>
+                                <div id="input-grp-single-1" class="form-row mt-4">
+                                    <div class="col-12"><button class="btn btn-primary" id="add-igr-btn" type="button" name="addbtn" style="margin-right: 9px;padding: 5px 16px;">Add</button><button class="btn btn-danger ml-auto" id="remove-igr-btn" type="button" name="removebtn" style="margin-left: 0px;margin-right: 0px;">Remove</button></div>
+                                </div>
+                                <div id="input-grp-single-1" class="form-row mt-4">
+                                    <div class="col-12"><label>List of Ingredients</label><textarea class="form-control" id="ingredients-list"></textarea></div>
+                                </div>
+                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                            </div>
+                        </div>
+                        <div id="single-form-next-prev-1" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
+                            <h3 class="text-center multisteps-form__title">Recipe Instructions</h3>
+                            <div id="form-content-2" class="multisteps-form__content">
+                                <div id="input-grp-single-2" class="form-row mt-4">
+                                    <div class="col-12"><input class="form-control multisteps-form__input" type="text" id="rep-Instructions" placeholder="Please enter each instruction" name="rep-ingredients" style="margin-bottom: 14px;"><button class="btn btn-primary" id="add-rep-ins-btn" type="button" name="add-rep-ins-btn" style="margin-right: 9px;padding: 5px 16px;">Add</button><button class="btn btn-danger ml-auto" id="remove-rep-ins-btn" type="button" name="remove-rep-ins-btn" style="margin-left: 0px;margin-right: 0px;">Remove</button></div>
+                                </div>
+                                <div id="input-grp-single-3" class="form-row mt-4">
+                                    <div class="col-12"><label>Recipe Instructions</label><textarea class="form-control" id="rep-instructions"></textarea></div>
+                                </div>
+                                <div id="next-prev-buttons-1" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn-success btn btn-primary ml-auto js-btn-next" id="save-rep-btn" type="button" title="save-rep-btn">Save</button></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section><!-- End: Multi step form -->
+    <!-- Start: Footer Basic -->
+    <footer class="footer-basic">
+        <div class="col"></div><!-- Start: Links -->
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul><!-- End: Links -->
+        <!-- Start: Copyright -->
+        <p class="copyright">MealPlanner © 2021</p><!-- End: Copyright -->
+    </footer><!-- End: Footer Basic -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/Multi-step-form.js"></script>
+</body>
+
+</html>
