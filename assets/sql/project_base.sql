@@ -1,4 +1,8 @@
-create database meal_planner;
+create database mealplanner;
+
+use mealplanner;
+
+--CREATE TABLES
 
 -- user (user_id, username, password, email, age, weight, height, calorie_goal, date_joined) 
 create table user (
@@ -142,3 +146,14 @@ create table meal_schedule (
     foreign key(meal_plan_id) references meal_plan(meal_plan_id) on update cascade on delete cascade,
     foreign key(user_id) references user(user_id) on update cascade on delete cascade
 );
+
+
+--STORED PROCEDURES
+
+delimiter //
+create procedure get_kitchen_inventory (in uid INT)
+begin
+select distinct ingredient.ingredient_name from kitchen_inventory inner join 
+ingredient where kitchen_inventory.user_id = uid and inventory.ingredient_id = ingredient.ingredient_id;
+end//
+delimiter ;
