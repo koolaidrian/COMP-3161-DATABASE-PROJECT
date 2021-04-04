@@ -25,7 +25,7 @@ class MyProvider(BaseProvider):
     
     measurementSizes = [".000", ".500",
                         ".175", ".375", ".625", ".875", 
-                        ".250", ".750"
+                        ".250", ".750",
                         ".333", ".667", ".999"]
     
     steps = ["S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"]
@@ -80,10 +80,11 @@ ids = {
 }
 
 recipeNames = []
+recipeSteps = defaultdict(list)
 
 ##Now, let’s decide on the kind of data that we’re going to take from the Faker instance to be stored in the fake variable.
 #200,000 fake users
-#-- user (user_id, username, password, email, age, weight, height, calorie_goal, date_joined) 
+#-- myuser (usr_id, usrname, password, email, age, weight, height, calorie_goal, date_joined) 
 f1 = open("populate_user.sql", "w")
 f1.write("--Populating user table\n")
 for i in range(200000):
@@ -95,7 +96,7 @@ for i in range(200000):
     weight = fake.weight()
     height = fake.height()
     calorie_goal = fake.calorie_goal()
-    f1.write("insert into myuser('usrname', 'pssword', 'email', 'age', 'weight', 'height', 'calorie_goal') values ('{}', '{}', '{}', {}, {}, {}, {});\n".format(username, password, email, age, weight, height, calorie_goal))
+    f1.write("insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('{}', '{}', '{}', {}, {}, {}, {});\n".format(username, password, email, age, weight, height, calorie_goal))
 f1.close()
 
 #600,000 fake recipes
@@ -107,7 +108,7 @@ for i in range(600000):
     rname = fake.food_name()
     recipeNames.append(rname)
     recipe_description = fake.sentence()
-    f2.write("insert into recipe('recipe_name', 'recipe_description') values ('{}', '{}');\n".format(rname, recipe_description))
+    f2.write("insert into recipe(recipe_name, recipe_description) values ('{}', '{}');\n".format(rname, recipe_description))
 f2.close()
 
 #-- ingredient (ingredient_id, ingredient_name, protein, fats, carbs, calories)
@@ -121,16 +122,16 @@ for i in range(500):
     fts = fake.grams()
     cbs = fake.grams()
     cal = pro*4 + cbs*4 + fts*9
-    f3.write("insert into ingredient('ingredient_id', 'ingredient_name', 'protein', 'fats', 'carbs', 'calories') values ('{}', '{}', {}, {}, {}, {});\n".format(iid, ingredient_name, pro, fts, cbs, cal))
+    f3.write("insert into ingredient(ingredient_id, ingredient_name, protein, fats, carbs, calories) values ('{}', '{}', {}, {}, {}, {});\n".format(iid, ingredient_name, pro, fts, cbs, cal))
 f3.close()
 
-#-- kitchen_inventory (user_id, ingredient_id)
+#-- kitchen_inventory (usr_id, ingredient_id)
 f4 = open("populate_kitchen_inventory.sql", "w")
 f4.write("--Populating kitchen_inventory table\n")
 for i in range(200000):
-    user_id = random.randint(0,ids["user"])
+    user_id = random.randint(1,ids["user"])
     ingredient_id = fake.random.choice(ids["ingredient"])
-    f4.write("insert into inventory('user_id', 'ingredient_id') values ('{}', '{}');\n".format(user_id, ingredient_id))
+    f4.write("insert into kitchen_inventory(usr_id, ingredient_id) values ('{}', '{}');\n".format(user_id, ingredient_id))
 f4.close()
 
 #-- measurement (measurement_id, measurement_name)
@@ -143,98 +144,101 @@ for i in range(12):
     ids["measurement"].append(mmid)
     measurement_name = measurements[0]
     measurements = measurements[1:]
-    f5.write("insert into measurement('measurement_id', 'measurement_name') values ('{}', '{}');\n".format(mmid, measurement_name))
+    f5.write("insert into measurement(measurement_id, measurement_name) values ('{}', '{}');\n".format(mmid, measurement_name))
 f5.close()
 
-#-- recipe_info (user_id, recipe_id, date_created)
+#-- recipe_info (usr_id, recipe_id, date_created)
 f6 = open("populate_recipe_info.sql", "w")
 f6.write("--Populating recipe_info table\n")
 #every recipe has an owner
-for i in range(600000):
-    user_id = random.randint(0,ids["user"])
+for i in range(1,600001):
+    user_id = random.randint(1,ids["user"])
     recipe_id = i
-    f6.write("insert into recipe_info('user_id', 'recipe_id') values ('{}', '{}');\n".format(user_id, recipe_id))
+    f6.write("insert into recipe_info(usr_id, recipe_id) values ('{}', '{}');\n".format(user_id, recipe_id))
 f6.close()
 
 #-- recipe_instruction(recipe_id, step_id, instruction)
 f7 = open("populate_recipe_instruction.sql", "w")
 f7.write("--Populating recipe_instruction table\n")
 #each recipe has at least one step
-for i in range(600000):
+for i in range(1,600001):
     recipe_id = i
     step_id = "S0"
+    recipeSteps[recipe_id].append( step_id )
     instruction = fake.sentence()
-    f7.write("insert into recipe_instruction('recipe_id', 'step_id', 'instruction') values ('{}', '{}', '{}');\n".format(recipe_id, step_id, instruction))
+    f7.write("insert into recipe_instruction(recipe_id, step_id, instruction) values ('{}', '{}', '{}');\n".format(recipe_id, step_id, instruction))
 #more instructions
 for i in range(600000):
-    recipe_id = random.randint(0,ids["recipe"])
+    recipe_id = random.randint(1,ids["recipe"])
     step_id = "S" + str(random.randint(1,9))
+    recipeSteps[recipe_id].append( step_id )
     instruction = fake.sentence()
-    f7.write("insert into recipe_instruction('recipe_id', 'step_id', 'instruction') values ('{}', '{}', '{}');\n".format(recipe_id, step_id, instruction))
+    f7.write("insert into recipe_instruction(recipe_id, step_id, instruction) values ('{}', '{}', '{}');\n".format(recipe_id, step_id, instruction))
 f7.close()
 
 #-- recipe_ingredient(recipe_id,step_id, ingredient_id, measurement_id, quantity)
 f8 = open("populate_recipe_ingredient.sql", "w")
 f8.write("--Populating recipe_ingredient table\n")
 #each recipe calls for at least one ingredient
-for i in range(600000):
+for i in range(1,600001):
     recipe_id = i
     step_id = "S0"
     ingredient_id = fake.random.choice(ids["ingredient"])
     measurement_id = fake.random.choice(ids["measurement"])
     quantity = fake.quantity()
-    f8.write("insert into recipe_ingredient('recipe_id', 'step_id', 'ingredient_id', 'measurement_id', 'quantity') values ('{}', '{}', '{}', '{}', {});\n".format(recipe_id,step_id, ingredient_id, measurement_id, quantity))
+    f8.write("insert into recipe_ingredient(recipe_id, step_id, ingredient_id, measurement_id, quantity) values ('{}', '{}', '{}', '{}', {});\n".format(recipe_id,step_id, ingredient_id, measurement_id, quantity))
 #other ingredients
 for i in range(600000):
-    recipe_id = random.randint(0,ids["recipe"])
+    recipe_id = random.randint(1,ids["recipe"])
     step_id = fake.step()
+    step_id = fake.random.choice(recipeSteps[recipe_id])
     ingredient_id = fake.random.choice(ids["ingredient"])
     measurement_id = fake.random.choice(ids["measurement"])
     quantity = fake.quantity()
-    f8.write("insert into recipe_ingredient('recipe_id', 'step_id', 'ingredient_id', 'measurement_id', 'quantity') values ('{}', '{}', '{}', '{}', {});\n".format(recipe_id,step_id, ingredient_id, measurement_id, quantity))
+    f8.write("insert into recipe_ingredient(recipe_id, step_id, ingredient_id, measurement_id, quantity) values ('{}', '{}', '{}', '{}', {});\n".format(recipe_id,step_id, ingredient_id, measurement_id, quantity))
 f8.close()
 
 #-- meal (meal_id, recipe_id, meal_name, meal_type, meal_image, servings)
 f9 = open("populate_meal.sql", "w")
-f9.write("\n --Populating meal table\n")
+f9.write("--Populating meal table\n")
 # need at leaast one meal from each type
 #breakfast
 mid = "M000000"
-recipe_id = 0
+recipe_id = 1
 meal_name = recipeNames[0]
 ids["Breakfast"].append(mid)
 meal_image = fake.meal_image()
 servings = random.randint(1,5)
-f9.write("insert into meal('meal_id', 'recipe_id', 'meal_name', 'meal_type', 'meal_image', 'servings') values ('{}', '{}', '{}', 'Breakfast', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
+f9.write("insert into meal(meal_id, recipe_id, meal_name, meal_type, meal_image, servings) values ('{}', '{}', '{}', 'Breakfast', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
 
 #lunch
 mid = "M000001"
-recipe_id = 1
+recipe_id = 2
 meal_name = recipeNames[1]
 ids["Lunch"].append(mid)
 meal_image = fake.meal_image()
 servings = random.randint(1,5)
-f9.write("insert into meal('meal_id', 'recipe_id', 'meal_name', 'meal_type', 'meal_image', 'servings') values ('{}', '{}', '{}', 'Lunch', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
+f9.write("insert into meal(meal_id, recipe_id, meal_name, meal_type, meal_image, servings) values ('{}', '{}', '{}', 'Lunch', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
 
 #dinner
 mid = "M000002"
-recipe_id = 2
+recipe_id = 3
 meal_name = recipeNames[2]
 ids["Dinner"].append(mid)
 meal_image = fake.meal_image()
 servings = random.randint(1,5)
-f9.write("insert into meal('meal_id', 'recipe_id', 'meal_name', 'meal_type', 'meal_image', 'servings') values ('{}', '{}', '{}', 'Dinner', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
+f9.write("insert into meal(meal_id, recipe_id, meal_name, meal_type, meal_image, servings) values ('{}', '{}', '{}', 'Dinner', '{}', {});\n".format(mid, recipe_id, meal_name, meal_image, servings))
 
 #more meals
 for i in range(3,600000):
     mid = "M" + "{:06d}".format(i)
-    recipe_id = i
+    recipe_id = i+1
     meal_name = recipeNames[i]
     mtype = fake.meal_type()
     ids[mtype].append(mid)
     meal_image = fake.meal_image()
     servings = random.randint(1,5)
-    f9.write("insert into meal('meal_id', 'recipe_id', 'meal_name', 'meal_type', 'meal_image', 'servings') values ('{}', '{}', '{}', '{}', '{}', {});\n".format(mid, recipe_id, meal_name, mtype, meal_image, servings))
+    f9.write("insert into meal(meal_id, recipe_id, meal_name, meal_type, meal_image, servings) values ('{}', '{}', '{}', '{}', '{}', {});\n".format(mid, recipe_id, meal_name, mtype, meal_image, servings))
 f9.close()
 
 #-- daily_meal (daily_meal_id, breakfast, lunch, dinner)
@@ -246,12 +250,12 @@ for i in range(50000):
     breakfast = fake.random.choice(ids["Breakfast"])
     lunch = fake.random.choice(ids["Lunch"])
     dinner = fake.random.choice(ids["Dinner"])
-    f10.write("insert into daily_meal('daily_meal_id', 'breakfast', 'lunch', 'dinner') values ('{}', '{}', '{}', '{}');\n".format(dmid, breakfast, lunch, dinner))
+    f10.write("insert into daily_meal(daily_meal_id, breakfast, lunch, dinner) values ('{}', '{}', '{}', '{}');\n".format(dmid, breakfast, lunch, dinner))
 f10.close()
 
-#-- meal_plan (meal_plan_id, day1, day2, day3, day4, day5, day6, day7)
+#-- mealplan (mealplan_id, day1, day2, day3, day4, day5, day6, day7)
 f11 = open("populate_meal_plan.sql", "w")
-f11.write("--Populating meal_plan table\n")
+f11.write("--Populating mealplan table\n")
 for i in range(250000):
     mpid = "MP" + "{:06d}".format(i)
     ids["meal_plan"].append(mpid)
@@ -262,16 +266,16 @@ for i in range(250000):
     day5 = fake.random.choice(ids["daily_meal"])
     day6 = fake.random.choice(ids["daily_meal"])
     day7 = fake.random.choice(ids["daily_meal"])
-    f11.write("insert into meal_plan('meal_plan_id', 'day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7') values ('{}', '{}', '{}', '{}', '{}', '{}', '{}');\n".format(mpid, day1, day2, day3, day4, day5, day6, day7))
+    f11.write("insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');\n".format(mpid, day1, day2, day3, day4, day5, day6, day7))
 f11.close()
 
-#-- meal_schedule (meal_plan_id, user_id, start_date, end_date)
+#-- meal_schedule (mealplan_id, usr_id, start_date, end_date)
 f12 = open("populate_meal_schedule.sql", "w")
 f12.write("--Populating meal_schedule table\n")
 for i in range(200000):
     meal_plan_id = fake.random.choice(ids["meal_plan"])
-    user_id = random.randint(0,ids["user"])
+    user_id = random.randint(1,ids["user"])
     start = fake.date()
     end_date = fake.date_between_dates(fake.date_object())
-    f12.write("insert into meal_schedule('meal_plan_id', 'user_id', 'start_date', 'end_date') values ('{}', '{}', '{}', '{}')\n".format(meal_plan_id, user_id, start, end_date))
+    f12.write("insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('{}', {}, '{}', '{}');\n".format(meal_plan_id, user_id, start, end_date))
 f12.close()
