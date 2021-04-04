@@ -1,3 +1,6 @@
+-- CODE FILLED WITH STORED PROCEDURE ERRORS
+-- TABLE CREATIONS  ARE FINE
+
 create database mealplanner;
 
 use mealplanner;
@@ -143,10 +146,63 @@ create table meal_schedule (
 
 --STORED PROCEDURES
 
+-- get kitchen inventory of a specific user
 delimiter //
 create procedure get_kitchen_inventory (in uid INT)
 begin
 select distinct ingredient.ingredient_name from kitchen_inventory inner join 
 ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient_id = ingredient.ingredient_id;
+end//
+delimiter ;
+
+-- get meals created by a specific user
+delimiter //
+create procedure get_usr_meal_info (in uid INT)
+begin
+select meal_name, meal_type, meal_image, servings ingredient.ingredient_name from meal inner join 
+recipe_info where recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id;
+end//
+delimiter ;
+
+-- get recipes created by a specific user
+delimiter //
+create procedure get_recipe_info (in uid INT)
+begin
+select recipe_name, date_created, step_id, instruction, ingredient_id, measurement_id, quantity from recipe_info inner join 
+recipe where recipe_info.usr_id = uid and recipe_info.recipe_id = ingredient.recipe_id
+inner join  recipe_instructions where recipe_info.recipe_id = recipe_instructions.recipe_id
+inner join recipe_ingredients where recipe_info.recipe_id = recipe_instructions.recipe_id;
+end//
+delimiter ;
+
+-- get current meal plan of specific user
+delimiter //
+create procedure get_current_meal_plan (in uid INT)
+begin
+select day1, day2, day3, day4, day5, day6, day7 from meal_schedule inner join 
+meal_plan where meal_schedule.usr_id = uid and meal_schedule.end_date between "!!!today and after!!!!" and meal_schedule.meal_plan_id = meal_plan.meal_plan_id;
+end//
+delimiter ;
+
+-- get daily_meal info by daily_meal id
+delimiter //
+create procedure get_daily_meal_info (in daily_meal_id INT)
+begin
+select breakfast, lunch, dinner from daily_meal where daily_meal.daily_meal_id = meal_id;
+delimiter ;
+
+-- get meal info by meal id
+delimiter //
+create procedure get_meal_info (in meal_id INT)
+begin
+select meal_name, meal_type, meal_image, servings from meal where meal.meal_id = meal_id;
+delimiter ;
+
+-- get past meal plans of specific user
+delimiter //
+create procedure get_current_meal_plan (in uid INT)
+begin
+select day1, day2, day3, day4, day5, day6, day7, start_date, end_date from meal_schedule inner join 
+meal_plan where meal_schedule.usr_id = uid and meal_schedule.end_date "!!!before today!!!!" and meal_schedule.meal_plan_id = meal_plan.meal_plan_id;
 end//
 delimiter ;
