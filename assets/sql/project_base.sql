@@ -4,8 +4,8 @@ use mealplanner;
 
 --CREATE TABLES
 
--- my_user (usr_id, usrname, pssword, email, age, weight, height, calorie_goal, date_joined) 
-create table my_user (
+-- myuser (usr_id, usrname, pssword, email, age, weight, height, calorie_goal, date_joined) 
+create table myuser (
 	usr_id int auto_increment not null,
 	usrname varchar(80) not null,
 	pssword varchar(80) not null,
@@ -42,8 +42,8 @@ create table kitchen_inventory (
 	usr_id int not null,
 	ingredient_id varchar(7) not null,
 	primary key(usr_id, ingredient_id),
-    foreign key(usr_id) references my_user(usr_id) on update cascade on delete cascade,
-    foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade
+    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
+    	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade
 );
 
 -- measurement (measurement_id, measurement_name)
@@ -59,8 +59,8 @@ create table recipe_info (
 	recipe_id int not null,
 	date_created timestamp not null,
 	primary key(recipe_id),
-    foreign key(usr_id) references my_user(usr_id) on update cascade on delete cascade,
-    foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
+    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- recipe_instruction(recipe_id, step_id, instruction)
@@ -69,7 +69,7 @@ create table recipe_instruction(
 	step_id varchar(2) not null,
 	instruction varchar(250) not null,
 	primary key(recipe_id, step_id),
-    foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- recipe_ingredient(recipe_id,step_id, ingredient_id, measurement_id, quantity)
@@ -80,10 +80,10 @@ create table recipe_ingredient(
 	measurement_id varchar(8) not null,
 	quantity decimal(10,3),
 	primary key(recipe_id, step_id, ingredient_id),
-    foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade,
-    foreign key(step_id) references recipe_instruction(step_id) on update cascade on delete cascade,
-    foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade,
-    foreign key(measurement_id) references measurement(measurement_id) on update cascade on delete cascade
+    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade,
+    	foreign key(step_id) references recipe_instruction(step_id) on update cascade on delete cascade,
+    	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade,
+    	foreign key(measurement_id) references measurement(measurement_id) on update cascade on delete cascade
 );
 
 -- meal (meal_id, recipe_id, meal_name, meal_type, meal_image, servings)
@@ -95,7 +95,7 @@ create table meal (
 	meal_image varchar(120) not null,
 	servings int not null,
 	primary key(meal_id),
-    foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- daily_meal (daily_meal_id, breakfast, lunch, dinner)
@@ -137,8 +137,8 @@ create table meal_schedule (
 	start_date date not null,
 	end_date date not null,
 	primary key(meal_plan_id, usr_id, start_date),
-    foreign key(meal_plan_id) references meal_plan(meal_plan_id) on update cascade on delete cascade,
-    foreign key(usr_id) references my_user(usr_id) on update cascade on delete cascade
+    	foreign key(meal_plan_id) references meal_plan(meal_plan_id) on update cascade on delete cascade,
+    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade
 );
 
 --STORED PROCEDURES
