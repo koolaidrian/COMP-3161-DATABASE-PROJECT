@@ -154,6 +154,7 @@ ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient
 end//
 delimiter ;
 
+/*
 -- get meals created by a specific user
 delimiter //
 create procedure get_usr_meal_info (in uid INT)
@@ -205,3 +206,4 @@ select day1, day2, day3, day4, day5, day6, day7, start_date, end_date from meal_
 mealplan where meal_schedule.usr_id = uid and meal_schedule.end_date "!!!before today!!!!" and meal_schedule.mealplan_id = mealplan.mealplan_id;
 end//
 delimiter ;
+*/
