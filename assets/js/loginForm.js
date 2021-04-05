@@ -22,6 +22,8 @@ window.onload = function(){
 
 
     function validateLoginPHP(username,password){
+         console.log("user = ", username);
+        console.log("pw - ", password);
 
         let url = "./assets/php/login.php";
         let xhttp = new XMLHttpRequest();
@@ -33,13 +35,17 @@ window.onload = function(){
 
             console.log(response);
 
-            if(response == "User not found"){
+            if(response == "valid user"){
+              location.assign("index.html");
+
+            }else if(response == "User not found"){
               alert(response);
             }else if (response == "invalid password"){
               alert(response);
             }else{
 
-              location.assign("index.html");
+              alert('Error occured')
+              
 
             }
 
