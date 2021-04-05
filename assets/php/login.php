@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 //echo 'working';
 $host = "localhost";
 $username = "root";
@@ -28,8 +30,12 @@ try {
     
     $userUsername = test_input($_POST["username"]);
     $userPW = test_input($_POST["password"]);
+    //$userPW2 = $_POST["password"];
+    //$userUsername = test_input('kelly8');
+    //$userPW = test_input('+mMUeJrk2z');
 
-    $stmt = $conn->query("SELECT Username,Password FROM User WHERE Username = '$userUsername'");
+
+    $stmt = $conn->query("SELECT usrname,pssword FROM myuser WHERE usrname = '$userUsername'");
 
     $query = $stmt ->fetchall(PDO::FETCH_ASSOC);
 //var_dump($query);
@@ -38,12 +44,17 @@ try {
 
         echo("User not found");
       
-      }elseif(!(( $userPW == $query[0]["Password"]) == true)){
+      }elseif(!(( $userPW == $query[0]["pssword"]) == true)){
+       
         echo("invalid password");
-      }else{
-      $user = $query[0]["Username"];
+      }elseif((( $userPW == $query[0]["pssword"]) == true)){
+        echo("valid user");
+        $user = $query[0]["usrname"];
       $_SESSION["user"] = $user;
+      }else{
 
+        echo("invalid user");
+    
 
       }
       // echo("working as should");
