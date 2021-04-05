@@ -1,9 +1,9 @@
 -- CODE FILLED WITH STORED PROCEDURE ERRORS
 -- TABLE CREATIONS  ARE FINE
 
-create database mealplanner;
-
-use mealplanner;
+DROP DATABASE IF EXISTS mealplanner;
+CREATE DATABASE mealplanner;
+USE mealplanner;
 
 --CREATE TABLES
 
