@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-
+/*
 if (isset($_SESSION['user'])){
     $user = $_SESSION["user"];
     //print_r($_SESSION);
 }else{
     $user = "";
 }
-
-
+*/
+$user = $_POST["username"];
+//echo($user);
 //echo 'working';
 $host = "localhost";
 $username = "root";
@@ -37,7 +38,7 @@ function test_input($data){
 
 
 // TO-DO: get userID from their USERNAME
-$stmt = $conn->query("SELECT * FROM myuser WHERE usrname LIKE '%$user%'");
+$stmt = $conn->query("call get_usr_id('$user')");
 $result = $stmt ->fetchall(PDO::FETCH_ASSOC);
 
 
@@ -47,46 +48,24 @@ if((sizeof($result)) < 1){
 }else {
 
     $userID = $result[0]['usr_id'];
+	// Free stmt set
+	$stmt = null;
+	$stmt = $conn->query("call get_kitchen_inventory('$userID')");
 
+	$query = $stmt ->fetchall(PDO::FETCH_ASSOC);
+	//var_dump($query);
 
+	if((sizeof($query)) < 1){
 
+		echo("Your kitchen is empty :( Time to go shopping!");
+	 
+	} else {
 
-$stmt = $conn->query("call get_kitchen_inventory('$userID')");
-//$stmt = $conn->query("exec get_kitchen_inventory $userID ");
-
-$query = $stmt ->fetchall(PDO::FETCH_ASSOC);
-//var_dump($query);
-
-if((sizeof($query)) < 1){
-
-    echo("Your kitchen is empty :( Time to go shopping!");
- 
-} else {
-
-
-
-    //show results in table
-    //echo $query;
-    //var_dump($query);
-
-    //stolen code
-
-   // echo "<table>"; // start a table tag in the HTML
-   // echo "<tr><td>My Ingredients</td></tr>";
-
-    //for ($x = 0; $x < sizeof($query); $x+=1) {
-        //var_dump($query[0]);
-      //  echo "<tr><td>" . $query[$x]['ingredient_name'] . "</td></tr>";//
-    //}
-
-    //echo "</table>"; //Close the table in HTML
-
-
+//<span style = "text-align:center;"><h1> Welcome <?php echo($user)  </h1></span>
+//<p> You have following ingredients in your kitchen </p>
 ?>
 
-<span style = "text-align:center;"><h1> Welcome <?php echo($user) ?> </h1></span>
-<p> You have following ingredients in your kitchen </p>
-<table id="Table">
+<table class="table" id="ingredients">
     <thead>
         <tr class="heading-ingredients">
             <th id="ingredients">Ingredients List</th>
@@ -100,8 +79,6 @@ if((sizeof($query)) < 1){
       </tr>
       <?php endforeach; ?>
     </tbody>
-
-
 </table>
 
 
