@@ -14,7 +14,7 @@ try {
 }
 
 
-$stmt = $conn->prepare("INSERT INTO user(Username,Password,Email,Age,Weight,Height,CalorieGoal) VALUES (:Username,:Password,:Email,:Age,:Weight,:Height,:CalGoal)");
+$stmt = $conn->prepare("INSERT INTO myuser(usrname,pssword,email,age,weight,height,calorie_goal) VALUES (:Username,:Password,:Email,:Age,:Weight,:Height,:CalGoal)");
 
 
 $stmt->bindParam('Username',$userUserName);

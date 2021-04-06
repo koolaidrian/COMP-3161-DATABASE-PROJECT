@@ -1,9 +1,9 @@
 -- CODE FILLED WITH STORED PROCEDURE ERRORS
 -- TABLE CREATIONS  ARE FINE
 
-create database mealplanner;
-
-use mealplanner;
+DROP DATABASE IF EXISTS mealplanner;
+CREATE DATABASE mealplanner;
+USE mealplanner;
 
 --CREATE TABLES
 
@@ -45,8 +45,8 @@ create table kitchen_inventory (
 	usr_id int not null,
 	ingredient_id varchar(7) not null,
 	primary key(usr_id, ingredient_id),
-    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
-    	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade
+	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
+	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade
 );
 
 -- measurement (measurement_id, measurement_name)
@@ -60,10 +60,10 @@ create table measurement (
 create table recipe_info (
 	usr_id int not null,
 	recipe_id int not null,
-	date_created timestamp not null,
+	dte_created timestamp not null,
 	primary key(recipe_id),
-    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
-    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade,
+	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- recipe_instruction(recipe_id, step_id, instruction)
@@ -72,7 +72,7 @@ create table recipe_instruction(
 	step_id varchar(2) not null,
 	instruction varchar(250) not null,
 	primary key(recipe_id, step_id),
-    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- recipe_ingredient(recipe_id,step_id, ingredient_id, measurement_id, quantity)
@@ -83,10 +83,9 @@ create table recipe_ingredient(
 	measurement_id varchar(8) not null,
 	quantity decimal(10,3),
 	primary key(recipe_id, step_id, ingredient_id),
-    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade,
-    	foreign key(step_id) references recipe_instruction(step_id) on update cascade on delete cascade,
-    	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade,
-    	foreign key(measurement_id) references measurement(measurement_id) on update cascade on delete cascade
+	foreign key(recipe_id, step_id) references recipe_instruction(recipe_id,step_id) on update cascade on delete cascade,
+	foreign key(ingredient_id) references ingredient(ingredient_id) on update cascade on delete cascade,
+	foreign key(measurement_id) references measurement(measurement_id) on update cascade on delete cascade
 );
 
 -- meal (meal_id, recipe_id, meal_name, meal_type, meal_image, servings)
@@ -98,7 +97,7 @@ create table meal (
 	meal_image varchar(120) not null,
 	servings int not null,
 	primary key(meal_id),
-    	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
+	foreign key(recipe_id) references recipe(recipe_id) on update cascade on delete cascade
 );
 
 -- daily_meal (daily_meal_id, breakfast, lunch, dinner)
@@ -113,17 +112,17 @@ create table daily_meal (
 	foreign key(dinner) references meal(meal_id) on update cascade on delete cascade
 );
 
--- meal_plan (meal_plan_id, day1, day2, day3, day4, day5, day6, day7)
-create table meal_plan (
-	meal_plan_id varchar(8) not null,
+-- mealplan (mealplan_id, day1, day2, day3, day4, day5, day6, day7)
+create table mealplan (
+	mealplan_id varchar(8) not null,
 	day1 varchar(8) not null,
 	day2 varchar(8) not null,
 	day3 varchar(8) not null,
 	day4 varchar(8) not null,
 	day5 varchar(8) not null,
 	day6 varchar(8) not null,
-	day7  varchar(8) not null,
-	primary key(meal_plan_id),
+	day7 varchar(8) not null,
+	primary key(mealplan_id),
 	foreign key(day1) references daily_meal(daily_meal_id) on update cascade on delete cascade,
 	foreign key(day2) references daily_meal(daily_meal_id) on update cascade on delete cascade,
 	foreign key(day3) references daily_meal(daily_meal_id) on update cascade on delete cascade,
@@ -133,15 +132,15 @@ create table meal_plan (
 	foreign key(day7) references daily_meal(daily_meal_id) on update cascade on delete cascade
 );
 
--- meal_schedule (meal_plan_id, usr_id, start_date, end_date)
+-- meal_schedule (mealplan_id, usr_id, start_date, end_date)
 create table meal_schedule (
-	meal_plan_id varchar(8) not null,
+	mealplan_id varchar(8) not null,
 	usr_id int not null,
-	start_date date not null,
-	end_date date not null,
-	primary key(meal_plan_id, usr_id, start_date),
-    	foreign key(meal_plan_id) references meal_plan(meal_plan_id) on update cascade on delete cascade,
-    	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade
+	startdate date not null,
+	enddate date not null,
+	primary key(mealplan_id, usr_id, startdate),
+	foreign key(mealplan_id) references mealplan(mealplan_id) on update cascade on delete cascade,
+	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade
 );
 
 --STORED PROCEDURES
@@ -150,37 +149,110 @@ create table meal_schedule (
 delimiter //
 create procedure get_kitchen_inventory (in uid INT)
 begin
-select distinct ingredient.ingredient_name from kitchen_inventory inner join 
-ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient_id = ingredient.ingredient_id;
+	select distinct ingredient.ingredient_name from kitchen_inventory 
+	inner join ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient_id = ingredient.ingredient_id;
+end//
+delimiter ;
+
+-- get user id
+delimiter //
+create procedure get_usr_id (in uname varchar(80))
+begin
+	select usr_id from myuser where usrname = uname;
 end//
 delimiter ;
 
 -- get meals created by a specific user
 delimiter //
-create procedure get_usr_meal_info (in uid INT)
+create procedure get_num_usr_meal (in uid INT)
 begin
-select meal_name, meal_type, meal_image, servings ingredient.ingredient_name from meal inner join 
-recipe_info where recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id;
+	select count(meal_id) as num_meals 
+	from meal
+	inner join recipe_info where recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id;
 end//
 delimiter ;
 
--- get recipes created by a specific user
+-- get breakfast meals created by a specific user
 delimiter //
-create procedure get_recipe_info (in uid INT)
+create procedure get_usr_breakfast_meals (in uid INT)
 begin
-select recipe_name, date_created, step_id, instruction, ingredient_id, measurement_id, quantity from recipe_info inner join 
-recipe where recipe_info.usr_id = uid and recipe_info.recipe_id = ingredient.recipe_id
-inner join  recipe_instructions where recipe_info.recipe_id = recipe_instructions.recipe_id
-inner join recipe_ingredients where recipe_info.recipe_id = recipe_instructions.recipe_id;
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Breakfast" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
 end//
 delimiter ;
 
+-- get lunch meals created by a specific user
+delimiter //
+create procedure get_usr_lunch_meals (in uid INT)
+begin
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Lunch" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
+end//
+delimiter ;
+
+-- get dinner meals created by a specific user
+delimiter //
+create procedure get_usr_dinner_meals (in uid INT)
+begin
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Dinner" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
+end//
+delimiter ;
+
+-- get recipe of a specific meal
+delimiter //
+create procedure get_recipe_info1 (in mid varchar(7))
+begin
+	select meal_name, meal_image, meal_type, recipe_description, dte_created, step_id, instruction
+	from meal 
+	join recipe_info on meal.meal_id = mid and meal.recipe_id = recipe_info.recipe_id
+	join recipe on recipe_info.recipe_id = recipe.recipe_id
+	left join recipe_instruction on recipe_info.recipe_id = recipe_instruction.recipe_id;
+end//
+delimiter ;
+
+delimiter //
+create procedure get_recipe_info2 (in mid varchar(7))
+begin
+	select meal_name, recipe_ingredient.step_id as step, instruction, ingredient_id, measurement_id, quantity
+	from meal 
+	join recipe_info on meal.meal_id = mid and meal.recipe_id = recipe_info.recipe_id
+	join recipe on recipe_info.recipe_id = recipe.recipe_id
+	join recipe_instruction on recipe_info.recipe_id = recipe_instruction.recipe_id
+	join recipe_ingredient on recipe_info.recipe_id = recipe_ingredient.recipe_id and recipe_instruction.step_id = recipe_ingredient.step_id;
+end//
+delimiter ;
+
+
+-- get ingredient name from id
+delimiter //
+create procedure get_ingredient_name (in iid varchar(7))
+begin
+	select ingredient_name from ingredient where ingredient_id = iid;
+end//
+delimiter ;
+
+-- get measurement name from id
+delimiter //
+create procedure get_measurement_name (in mmid varchar(8))
+begin
+	select measurement_name from measurement where measurement_id = mmid;
+end//
+delimiter ;
+
+/*
 -- get current meal plan of specific user
 delimiter //
-create procedure get_current_meal_plan (in uid INT)
+create procedure get_current_mealplan (in uid INT)
 begin
 select day1, day2, day3, day4, day5, day6, day7 from meal_schedule inner join 
-meal_plan where meal_schedule.usr_id = uid and meal_schedule.end_date between "!!!today and after!!!!" and meal_schedule.meal_plan_id = meal_plan.meal_plan_id;
+mealplan where meal_schedule.usr_id = uid and meal_schedule.end_date between "!!!today and after!!!!" and meal_schedule.mealplan_id = mealplan.mealplan_id;
 end//
 delimiter ;
 
@@ -200,9 +272,10 @@ delimiter ;
 
 -- get past meal plans of specific user
 delimiter //
-create procedure get_current_meal_plan (in uid INT)
+create procedure get_current_mealplan (in uid INT)
 begin
 select day1, day2, day3, day4, day5, day6, day7, start_date, end_date from meal_schedule inner join 
-meal_plan where meal_schedule.usr_id = uid and meal_schedule.end_date "!!!before today!!!!" and meal_schedule.meal_plan_id = meal_plan.meal_plan_id;
+mealplan where meal_schedule.usr_id = uid and meal_schedule.end_date "!!!before today!!!!" and meal_schedule.mealplan_id = mealplan.mealplan_id;
 end//
 delimiter ;
+*/

@@ -1,0 +1,21 @@
+--Populating user table
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Richard0', 'cx%YZaQF&6', 'Richard0@gmail.com', 21, 114, 168, 1267);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Laura1', '!8DflN_i#9', 'Laura1@gmail.com', 46, 166, 178, 2664);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Melissa2', 'i*8%2WMhaT', 'Melissa2@gmail.com', 58, 229, 214, 1514);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Angela3', 'tG)*8C(mRM', 'Angela3@gmail.com', 32, 220, 166, 1440);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('David4', '&1LiO0vv2i', 'David4@gmail.com', 56, 73, 178, 1995);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Kevin5', '(mjb6hCwk$', 'Kevin5@gmail.com', 30, 75, 160, 3585);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Stephanie6', 'c#T6jfwbqP', 'Stephanie6@gmail.com', 32, 231, 182, 2790);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Aaron7', '#PqKis#P4G', 'Aaron7@gmail.com', 24, 194, 151, 3344);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Julie8', 'u_SZ8DCdsS', 'Julie8@gmail.com', 31, 203, 166, 2321);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Rachel9', 'XR4@3FTae+', 'Rachel9@gmail.com', 49, 229, 205, 3410);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Steven10', 'GA0l%Ief3*', 'Steven10@gmail.com', 47, 81, 189, 2879);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Christopher11', '+kKGXzl$1W', 'Christopher11@gmail.com', 66, 119, 167, 3553);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Kimberly12', 'Wb66Pw*!%!', 'Kimberly12@gmail.com', 69, 72, 162, 3046);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Pamela13', '#z05a9JuwY', 'Pamela13@gmail.com', 59, 232, 200, 1551);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Bonnie14', 'vToj@3^bA#', 'Bonnie14@gmail.com', 37, 102, 146, 3258);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Tony15', '&97TOastjY', 'Tony15@gmail.com', 46, 122, 192, 2581);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Megan16', '@NI0OSo28m', 'Megan16@gmail.com', 64, 156, 209, 2234);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Gregory17', 'VP9$Sz)au^', 'Gregory17@gmail.com', 63, 241, 211, 2351);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Connie18', 'n4_lAP#a+(', 'Connie18@gmail.com', 59, 221, 214, 2539);
+insert into myuser(usrname, pssword, email, age, weight, height, calorie_goal) values ('Dean19', 'e8PBht4j@$', 'Dean19@gmail.com', 19, 270, 192, 3292);
