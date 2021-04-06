@@ -149,32 +149,104 @@ create table meal_schedule (
 delimiter //
 create procedure get_kitchen_inventory (in uid INT)
 begin
-select distinct ingredient.ingredient_name from kitchen_inventory inner join 
-ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient_id = ingredient.ingredient_id;
+	select distinct ingredient.ingredient_name from kitchen_inventory 
+	inner join ingredient where kitchen_inventory.usr_id = uid and kitchen_inventory.ingredient_id = ingredient.ingredient_id;
+end//
+delimiter ;
+
+-- get user id
+delimiter //
+create procedure get_usr_id (in uname varchar(80))
+begin
+	select usr_id from myuser where usrname = uname;
+end//
+delimiter ;
+
+-- get meals created by a specific user
+delimiter //
+create procedure get_num_usr_meal (in uid INT)
+begin
+	select count(meal_id) as num_meals 
+	from meal
+	inner join recipe_info where recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id;
+end//
+delimiter ;
+
+-- get breakfast meals created by a specific user
+delimiter //
+create procedure get_usr_breakfast_meals (in uid INT)
+begin
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Breakfast" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
+end//
+delimiter ;
+
+-- get lunch meals created by a specific user
+delimiter //
+create procedure get_usr_lunch_meals (in uid INT)
+begin
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Lunch" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
+end//
+delimiter ;
+
+-- get dinner meals created by a specific user
+delimiter //
+create procedure get_usr_dinner_meals (in uid INT)
+begin
+	select meal_id, meal_name, meal_type, meal_image, recipe_description 
+	from meal 
+	inner join recipe_info on recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id and meal_type = "Dinner" 
+	inner join recipe on recipe.recipe_id = recipe_info.recipe_id;
+end//
+delimiter ;
+
+-- get recipe of a specific meal
+delimiter //
+create procedure get_recipe_info1 (in mid varchar(7))
+begin
+	select meal_name, meal_image, meal_type, recipe_description, dte_created, step_id, instruction
+	from meal 
+	join recipe_info on meal.meal_id = mid and meal.recipe_id = recipe_info.recipe_id
+	join recipe on recipe_info.recipe_id = recipe.recipe_id
+	left join recipe_instruction on recipe_info.recipe_id = recipe_instruction.recipe_id;
+end//
+delimiter ;
+
+delimiter //
+create procedure get_recipe_info2 (in mid varchar(7))
+begin
+	select meal_name, recipe_ingredient.step_id as step, instruction, ingredient_id, measurement_id, quantity
+	from meal 
+	join recipe_info on meal.meal_id = mid and meal.recipe_id = recipe_info.recipe_id
+	join recipe on recipe_info.recipe_id = recipe.recipe_id
+	join recipe_instruction on recipe_info.recipe_id = recipe_instruction.recipe_id
+	join recipe_ingredient on recipe_info.recipe_id = recipe_ingredient.recipe_id and recipe_instruction.step_id = recipe_ingredient.step_id;
+end//
+delimiter ;
+
+
+-- get ingredient name from id
+delimiter //
+create procedure get_ingredient_name (in iid varchar(7))
+begin
+	select ingredient_name from ingredient where ingredient_id = iid;
+end//
+delimiter ;
+
+-- get measurement name from id
+delimiter //
+create procedure get_measurement_name (in mmid varchar(8))
+begin
+	select measurement_name from measurement where measurement_id = mmid;
 end//
 delimiter ;
 
 /*
--- get meals created by a specific user
-delimiter //
-create procedure get_usr_meal_info (in uid INT)
-begin
-select meal_name, meal_type, meal_image, servings ingredient.ingredient_name from meal inner join 
-recipe_info where recipe_info.usr_id = uid and recipe_info.recipe_id = meal.recipe_id;
-end//
-delimiter ;
-
--- get recipes created by a specific user
-delimiter //
-create procedure get_recipe_info (in uid INT)
-begin
-select recipe_name, date_created, step_id, instruction, ingredient_id, measurement_id, quantity from recipe_info inner join 
-recipe where recipe_info.usr_id = uid and recipe_info.recipe_id = ingredient.recipe_id
-inner join  recipe_instructions where recipe_info.recipe_id = recipe_instructions.recipe_id
-inner join recipe_ingredients where recipe_info.recipe_id = recipe_instructions.recipe_id;
-end//
-delimiter ;
-
 -- get current meal plan of specific user
 delimiter //
 create procedure get_current_mealplan (in uid INT)

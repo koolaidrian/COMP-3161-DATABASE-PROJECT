@@ -6,24 +6,17 @@ window.onload = function(){
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
 
-
-
         console.log("user = ", username);
         console.log("pw - ", password);
 
-
         validateLoginPHP(username,password);
-
-
-
-
 
     });
 
 
     function validateLoginPHP(username,password){
-         console.log("user = ", username);
-        console.log("pw - ", password);
+        //console.log("user = ", username);
+        //console.log("pw - ", password);
 
         let url = "./assets/php/login.php";
         let xhttp = new XMLHttpRequest();
@@ -35,24 +28,15 @@ window.onload = function(){
 
             console.log(response);
 
-            if(response == "valid user"){
-              location.assign("index.html");
-
-            }else if(response == "User not found"){
+            if(response == "User not found"){
               alert(response);
             }else if (response == "invalid password"){
               alert(response);
             }else{
-
-              alert('Error occured')
-              
-
+                sessionStorage.setItem('this_user', username);
+		        console.log(sessionStorage.getItem('this_user'));
+                location.assign("index.html");
             }
-
-
-
-
-
           }
         };
 
@@ -61,9 +45,6 @@ window.onload = function(){
         xhttp.send("username=" + username + "&password=" + password);
 
       }
-
-
-
 
 
 }
