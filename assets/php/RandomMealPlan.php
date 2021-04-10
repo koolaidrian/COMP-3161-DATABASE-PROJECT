@@ -10,6 +10,8 @@ if (isset($_SESSION['user'])){
 }
 */
 $user = $_POST["username"];
+
+
 //echo($user);
 //echo 'working';
 $host = "localhost";
@@ -47,34 +49,52 @@ if((sizeof($result)) < 1){
 
 }else {
 
-    $userID = $result[0]['usr_id'];
-	// Free stmt set
-	$stmt = null;
-	
-	$stmt = $conn->query("call get_usr_dinner_meals('$userID')");
-	if ($stmt) {
-		$query = $stmt ->fetchall(PDO::FETCH_ASSOC);
-		if (sizeof($query)<1){
-			?><p>You haven't added any dinner meals yet :( Time to start experimenting!</p><?php
-		}else{
-			?>
-			<div class="card-group">
-			<?php foreach ($query as $meal): ?>
-				<div class="card"><img class="card-img-top w-100 d-block" src=<?= $meal['meal_image']; ?> style="max-height: 300px;">
-					<div class="card-body">
-						<h4 class="card-title"><?= $meal['meal_name']; ?></h4>
-						<p class="card-text"><?= $meal['recipe_description']; ?></p><button class='morebtn' id='<?=$meal['meal_id'] ?>' type="button" href="/MealDetails.html">More</button>
-					</div>
-				</div>
-			<?php endforeach; ?>
-			</div> <?php
-		}
-	}
-	else {
-		?>
-		<p>You haven't added any dinner meals yet :( Time to start experimenting!</p>
-		<?php 
-	}
-}
+	$userID = $result[0]['usr_id'];
 
+	$start = date("Y-m-d");
+	$end = ("2021-04-10");
+	
+	//get random meal plans
+	$stmt = null;
+	$stmt = $conn -> query("call get_num_meal_plans()");
+	if ($stmt){
+		$numMPq = $stmt -> fetchall(PDO:: FETCH_ASSOC);
+		$numMP = $numMPq[0]["num_mealplans"];
+		$y = strlen($numMP);
+		$x = rand(0,$y);
+		$y = strlen($x);
+
+		$newMP = "";
+		if ($y == 1){
+			$newMP = "MP00000".$x;
+		} else if ($y == 2){
+			$newMP = "MP0000".$x;
+		}else if ($y == 3){
+			$newMP = "MP000".$x;
+		} else if ($y == 4){
+			$newMP = "MP00".$x;
+		} else if ($y == 5){
+			$newMP = "MP0".$x;
+		}else {
+			$newMP = "MP".$x;
+		}
+
+		// Free stmt set
+		$stmt = null;
+		$stmt = $conn -> query("call assign_meal_plan('$newMP', 'current', '$userID', '$start', '$end')");
+		if ($stmt) {
+			$curr = $stmt -> fetchall(PDO:: FETCH_ASSOC);
+			if (sizeof($curr)==0){
+				echo("Success");
+			}else{
+				echo("Error with assigning mealplan");
+			}
+		} else {
+			echo("Error: cannot assign mealplan");
+		}
+	}else{
+		echo ("Error");
+	}
+																
+}
 ?>

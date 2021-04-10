@@ -8,7 +8,11 @@ window.onload = function(){
 		if(e.target && e.target.className== 'morebtn'){
           sessionStorage.setItem('currMeal', e.target.id);
 		  location.assign("MealDetails.html");
-		}
+        } else if (e.target && e.target.id == 'search') {
+            rec = document.getElementById("find");
+            sessionStorage.setItem('currRec', rec.value);
+            location.assign("FindRecipe.html");
+        }
 		
 	});
 }

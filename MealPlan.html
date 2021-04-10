@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -17,11 +16,10 @@
     <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-
 <body>
-    <!-- Start: Navigation with Button -->
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
-        <div class="container"><a class="navbar-brand" href="index.html">MealPlanner</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">MealPlanner</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
@@ -31,10 +29,113 @@
                 </ul><span class="navbar-text actions"> <a class="login" href="Login.html">Log out</a></span>
             </div>
         </div>
-    </nav><!-- End: Navigation with Button -->
+    </nav>
+    <div class="">
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="past" style="display: inline-block; margin-right: 9px;padding: 5px 16px;">Past Plans</a></button>
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="new" style="display: inline-block; margin-left: 9px; margin-right: 9px;padding: 5px 16px;">New Plan</a></button>
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="edit" style="display: inline-block;margin-left: 9px; margin-right: 9px;padding: 5px 16px;">Edit Plan</a></button>
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="cancel" style="display: inline-block;margin-left: 9px; margin-right: 9px;padding: 5px 16px;">Cancel Plan</a></button>
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="complete" style="display: inline-block;margin-left: 9px; margin-right: 9px;padding: 5px 16px;">Complete Plan</a></button>
+        <button class="btn btn-primary d-xl-flex" type="button"><a class="text-white" id="delete" style="display: inline-block;margin-left: 9px; margin-right: 9px;padding: 5px 16px;">Delete Plan</a></button>
+    </div>
+    <div class="container" id="theplan">
+        <h2 id="range"></h2>
+        <div class="row">
+            <div class="col-md-6" width="130">
+                <div class="list-group" width="110">
+                    <button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button">All Ingredients</a>
+                            <div class="collapse" id="collapse-1">
+                                <ul id="all_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" href="#collapse-2" role="button">Day 1 Ingredients</a>
+                            <div class="collapse" id="collapse-2">
+                                <ul id="day1_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-3" href="#collapse-3" role="button">Day 2 Ingredients</a>
+                            <div class="collapse" id="collapse-3">
+                                <ul id="day2_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-4" href="#collapse-4" role="button">Day 3 Ingredients</a>
+                            <div class="collapse" id="collapse-4">
+                                <ul id="day3_ingredients" style="list-style-type:none;" align="center"> </ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-5" href="#collapse-5" role="button">Day 4 Ingredients</a>
+                            <div class="collapse" id="collapse-5">
+                                <ul id="day4_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-6" href="#collapse-6" role="button">Day 5 Ingredients</a>
+                            <div class="collapse" id="collapse-6">
+                                <ul id="day5_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-7" href="#collapse-7" role="button">Day 6 Ingredients</a>
+                            <div class="collapse" id="collapse-7">
+                                <ul id="day6_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button><button class="list-group-item list-group-item-action" align="center">
+                        <div class="border rounded-pill">
+                            <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-8" href="#collapse-8" role="button">Day 7 Ingredients</a>
+                            <div class="collapse" id="collapse-8">
+                                <ul id="day7_ingredients" style="list-style-type:none;" align="center"></ul>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row" id="Day1Label">
+                    <h2 id="hday1">Day1</h2>
+                </div>
+                <div class="row" id="Day1"></div>
+                <div class="row" id="Day2Label">
+                    <h2 id="hday2">Day2</h2>
+                </div>
+                <div class="row" id="Day2"></div>
+                <div class="row" id="Day3Label">
+                    <h2 id="hday3">Day3</h2>
+                </div>
+                <div class="row" id="Day3"></div>
+                <div class="row" id="Day4Label">
+                    <h2 id="hday4">Day4</h2>
+                </div>
+                <div class="row" id="Day4"></div>
+                <div class="row" id="Day5Label">
+                    <h2 id="hday5">Day5</h2>
+                </div>
+                <div class="row" id="Day5"> </div>
+                <div class="row" id="Day6Label">
+                    <h2 id="hday6">Day6</h2>
+                </div>
+                <div class="row" id="Day6"></div>
+                <div class="row" id="Day7Label">
+                    <h2 id="hday7">Day7</h2>
+                </div>
+                <div class="row" id="Day7"></div>
+            </div>
+        </div>
+    </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/Multi-step-form.js"></script>
+    <script src="assets/js/meal_schedule.js"></script>
 </body>
-
 </html>

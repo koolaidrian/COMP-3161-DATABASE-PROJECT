@@ -96,7 +96,7 @@ recipeDups = []
 counter = 0
 f1 = open("populate_user.sql", "w")
 f1.write("--Populating user table\n")
-for i in range(200000):
+for i in range(200):
     counter += 1
     ids["user"] = ids["user"] + 1
     username = fake.first_name() + str(i)
@@ -115,7 +115,7 @@ f1.close()
 f2 = open("populate_recipe.sql", "w")
 f2.write("--Populating recipe table\n")
 counter = 0
-for i in range(600000):
+for i in range(6000):
     counter+=1
     ids["recipe"] = ids["recipe"] + 1
     rname = fake.food_name()
@@ -147,7 +147,7 @@ f4 = open("populate_kitchen_inventory.sql", "w")
 f4.write("--Populating kitchen_inventory table\n")
 holder=[]
 counter = 0
-for i in range(200000):
+for i in range(200):
     counter+=1
     user_id = random.randint(1,ids["user"])
     ingredient_id = fake.random.choice(ids["ingredient"])
@@ -156,7 +156,7 @@ for i in range(200000):
     while(foo):
         count += 1
         hold = str(user_id) + str(ingredient_id)
-        if(count == 10):
+        if(count == 5):
             foo = False
             break
         elif (hold not in holder):
@@ -187,7 +187,7 @@ f6 = open("populate_recipe_info.sql", "w")
 f6.write("--Populating recipe_info table\n")
 counter=0
 #every recipe has an owner
-for i in range(1,600001):
+for i in range(1,6001):
     counter+=1
     user_id = random.randint(1,ids["user"])
     recipe_id = i
@@ -200,7 +200,7 @@ f7 = open("populate_recipe_instruction.sql", "w")
 f7.write("--Populating recipe_instruction table\n")
 counter=0
 #each recipe has at least one step
-for i in range(1,600001):
+for i in range(1,6001):
     counter+=1
     recipe_id = i
     step_id = "S0"
@@ -209,7 +209,7 @@ for i in range(1,600001):
     f7.write("insert into recipe_instruction(recipe_id, step_id, instruction) values ('{}', '{}', '{}');\n".format(recipe_id, step_id, instruction))
     print("recipe" + str(counter) + "S0")
 #more instructions
-for i in range(600000):
+for i in range(600):
     counter+=1
     recipe_id = random.randint(1,ids["recipe"])
     step_id = "S" + str(random.randint(1,9))
@@ -217,7 +217,7 @@ for i in range(600000):
     count = 0
     while (foo):
         count += 1
-        if (count == 10):
+        if (count == 5):
             foo = False
             break;
         elif (step_id not in recipeSteps[recipe_id]):
@@ -235,7 +235,7 @@ f8 = open("populate_recipe_ingredient.sql", "w")
 f8.write("--Populating recipe_ingredient table\n")
 #each recipe calls for at least one ingredient
 counter=0
-for i in range(1,600001):
+for i in range(1,6001):
     counter+=1
     recipe_id = i
     step_id = "S0"
@@ -248,7 +248,7 @@ for i in range(1,600001):
     f8.write("insert into recipe_ingredient(recipe_id, step_id, ingredient_id, measurement_id, quantity) values ('{}', '{}', '{}', '{}', {});\n".format(recipe_id,step_id, ingredient_id, measurement_id, quantity))
     print("recipe" + str(counter) + "SO ing" )
 #other ingredients
-for i in range(600000):
+for i in range(600):
     counter+=1
     recipe_id = random.randint(1,ids["recipe"])
     step_id = fake.random.choice(recipeSteps[recipe_id])
@@ -258,7 +258,7 @@ for i in range(600000):
     while(foo):
         count += 1
         holder = str(recipe_id) + str(step_id) + str(ingredient_id)
-        if (count == 10):
+        if (count == 5):
             foo = False
             break;
         elif (holder not in recipeDups):
@@ -305,7 +305,7 @@ f9.write("insert into meal(meal_id, recipe_id, meal_name, meal_type, meal_image,
 
 #more meals
 counter=3
-for i in range(3,600000):
+for i in range(3,6000):
     counter+=1
     mid = "M" + "{:06d}".format(i)
     recipe_id = i+1
@@ -323,26 +323,13 @@ f10 = open("populate_daily_meal.sql", "w")
 f10.write("--Populating daily_meal table\n")
 holder =[]
 counter=0
-for i in range(50000):
+for i in range(500):
     counter+=1
     dmid = "DM" + "{:06d}".format(i)
     ids["daily_meal"].append(dmid)
     breakfast = fake.random.choice(ids["Breakfast"])
     lunch = fake.random.choice(ids["Lunch"])
     dinner = fake.random.choice(ids["Dinner"])
-    foo = True
-    count = 0
-    while(foo):
-        count += 1
-        hold = dmid + breakfast + lunch + dinner
-        if(count == 10):
-            foo = False
-            break;
-        elif (hold not in holder):
-            foo = False
-            holder.append(hold)
-        else:
-            dinner = fake.random.choice(ids["Dinner"])
     f10.write("insert into daily_meal(daily_meal_id, breakfast, lunch, dinner) values ('{}', '{}', '{}', '{}');\n".format(dmid, breakfast, lunch, dinner))
     print("dailymeal" + str(counter) )
 f10.close()
@@ -352,7 +339,7 @@ f11 = open("populate_meal_plan.sql", "w")
 f11.write("--Populating mealplan table\n")
 holder = []
 counter=0
-for i in range(250000):
+for i in range(250):
     counter+=1
     mpid = "MP" + "{:06d}".format(i)
     ids["meal_plan"].append(mpid)
@@ -363,19 +350,6 @@ for i in range(250000):
     day5 = fake.random.choice(ids["daily_meal"])
     day6 = fake.random.choice(ids["daily_meal"])
     day7 = fake.random.choice(ids["daily_meal"])
-    foo = True
-    count = 0
-    while(foo):
-        count += 1
-        hold = mpid + day1 + day2 + day3 + day4 +day5 + day6 + day7
-        if(count == 10):
-            foo = False
-            break;
-        elif (hold not in holder):
-            foo = False
-            holder.append(hold)
-        else:
-            day7 = fake.random.choice(ids["daily_meal"])
     f11.write("insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}');\n".format(mpid, day1, day2, day3, day4, day5, day6, day7))
     print("mealplan" + str(counter) )
 f11.close()
@@ -385,7 +359,7 @@ f12 = open("populate_meal_schedule.sql", "w")
 f12.write("--Populating meal_schedule table\n")
 counter=0
 #completed
-for i in range(50000):
+for i in range(50):
     counter+=1
     meal_plan_id = fake.random.choice(ids["meal_plan"])
     user_id = random.randint(1,ids["user"])
@@ -395,7 +369,7 @@ for i in range(50000):
     print("mealschedule" + str(counter) )
 
 #cancelled
-for i in range(50000):
+for i in range(50):
     counter+=1
     meal_plan_id = fake.random.choice(ids["meal_plan"])
     user_id = random.randint(1,ids["user"])
@@ -408,7 +382,7 @@ for i in range(50000):
 s=[]
 for j in range(ids["user"]):
     s.append(j+1)
-for i in range(100000):
+for i in range(100):
     counter+=1
     meal_plan_id = fake.random.choice(ids["meal_plan"])
     user_id = fake.random.choice(s)

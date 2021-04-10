@@ -10,6 +10,7 @@ if (isset($_SESSION['user'])){
 }
 */
 $user = $_POST["username"];
+
 //echo($user);
 //echo 'working';
 $host = "localhost";
@@ -47,34 +48,21 @@ if((sizeof($result)) < 1){
 
 }else {
 
-    $userID = $result[0]['usr_id'];
-	// Free stmt set
-	$stmt = null;
+	$userID = $result[0]['usr_id'];
 	
-	$stmt = $conn->query("call get_usr_dinner_meals('$userID')");
-	if ($stmt) {
-		$query = $stmt ->fetchall(PDO::FETCH_ASSOC);
-		if (sizeof($query)<1){
-			?><p>You haven't added any dinner meals yet :( Time to start experimenting!</p><?php
-		}else{
-			?>
-			<div class="card-group">
-			<?php foreach ($query as $meal): ?>
-				<div class="card"><img class="card-img-top w-100 d-block" src=<?= $meal['meal_image']; ?> style="max-height: 300px;">
-					<div class="card-body">
-						<h4 class="card-title"><?= $meal['meal_name']; ?></h4>
-						<p class="card-text"><?= $meal['recipe_description']; ?></p><button class='morebtn' id='<?=$meal['meal_id'] ?>' type="button" href="/MealDetails.html">More</button>
-					</div>
-				</div>
-			<?php endforeach; ?>
-			</div> <?php
-		}
-	}
-	else {
-		?>
-		<p>You haven't added any dinner meals yet :( Time to start experimenting!</p>
-		<?php 
+	//get user's current meal plan
+    // Free stmt set
+    $stmt = null;
+    $stmt = $conn -> query("call get_current_mealplan('$userID')");
+    if ($stmt) {
+        $curr = $stmt -> fetchall(PDO:: FETCH_ASSOC);
+        if (sizeof($curr) == 0) {
+            echo("Not found");
+        } else {
+            echo( $curr[0]['mealplan_id']);
+        }
+	}else{
+		echo("Error");
 	}
 }
-
 ?>
