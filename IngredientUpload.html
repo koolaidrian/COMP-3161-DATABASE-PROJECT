@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>MealPlanner</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="assets/css/Header-Blue.css">
+    <link rel="stylesheet" href="assets/css/Header-Dark-1.css">
+    <link rel="stylesheet" href="assets/css/Header-Dark.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Multi-step-form.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header class="header-dark" style="background: url(&quot;assets/img/Breakfastbackground-unsplash.jpg&quot;);">
+        <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">MealPlanner</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="MealPlan.html">MyMealPlan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Meals.html">Meals</a></li>
+                        <li class="nav-item"><a class="nav-link" href="KitchenInventory.html">Inventory</a></li>
+                    </ul><span class="navbar-text actions"> <a class="login" href="Login.html">Log out</a></span>
+                </div>
+            </div>
+        </nav>
+        <div class="container hero">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1 class="text-center">MealPlanner</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="col"></div>
+    <form>
+        <div class="col">
+            <h3 class="text-center form__title">Add Ingredients</h3>
+            <div id="form_content" align="center">
+                <div id="input-grp-double-1" class="form-row mt-4">
+                    <div class="col-12 col-sm-4 mt-4 mt-sm-0">
+                        <select class="form-control multisteps-form__input" name="ingredients-name" placeholder="ingredients name" id="selections">
+                            <optgroup label="Ingredients-name" ">
+                                <option value="Egg" selected="">Egg</option>
+                                <option value="Bacon">Bacon</option>
+                                <option value="Cheese">Cheese</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div id="input-grp-single-2" class="form-row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-primary" id="add_igr_btn" type="button" name="addbtn" style="margin-right: 9px;padding: 5px 16px;">Add</button>
+                        <button class="btn btn-danger ml-auto" id="remove_igr_btn" type="button" name="removebtn" style="margin-left: 9px; margin-right: 9px;padding: 5px 16px;">Remove</button>
+                        <button class="btn btn-primary" id="back_btn" type="button" name="addbtn" style="margin-right: 9px;padding: 5px 16px;">Back to Kitchen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <footer class="footer-basic">
+        <div class="col"></div>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Home</a></li>
+            <li class="list-inline-item"><a href="#">Services</a></li>
+            <li class="list-inline-item"><a href="#">About</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="copyright">MealPlanner © 2021</p>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/ingredient_upload.js"></script>
+</body>
+</html>
