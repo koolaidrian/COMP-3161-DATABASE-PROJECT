@@ -3,12 +3,14 @@ window.onload = function(){
 
     loginbtn.addEventListener("click",function(){
 
+      alert("checking clicks");
+
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
 
         console.log("user = ", username);
         console.log("pw - ", password);
-
+        //location.assign("signUp.html");
         validateLoginPHP(username,password);
 
     });

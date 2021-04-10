@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])){
     $user = "";
 }
 */
-$user = $_POST["username"];
+$user = $_GET["username"];
 //echo($user);
 //echo 'working';
 $host = "localhost";
@@ -34,7 +34,7 @@ function test_input($data){
     return $data;
 }
     
-//$userID = test_input($_POST["user_id"]);
+//$userID = test_input($_GET["user_id"]);
 
 
 // TO-DO: get userID from their USERNAME

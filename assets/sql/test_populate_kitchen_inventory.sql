@@ -1,0 +1,21 @@
+--Populating kitchen_inventory table
+insert into kitchen_inventory(usr_id, ingredient_id) values ('9', 'I000017');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('9', 'I000015');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('20', 'I000006');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('2', 'I000011');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('8', 'I000031');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('2', 'I000028');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('13', 'I000042');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('5', 'I000000');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('16', 'I000045');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('15', 'I000028');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('13', 'I000003');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('4', 'I000016');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('8', 'I000016');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('20', 'I000004');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('14', 'I000037');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('18', 'I000018');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('4', 'I000031');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('20', 'I000012');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('14', 'I000046');
+insert into kitchen_inventory(usr_id, ingredient_id) values ('19', 'I000045');
