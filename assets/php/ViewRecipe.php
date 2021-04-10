@@ -52,15 +52,22 @@ if((sizeof($result)) < 1){
 	$stmt = null;
 	$stmt = $conn->query("call get_recipe_info2('$meal_id')");
 	$query = $stmt ->fetchall(PDO::FETCH_ASSOC);
+
+	// Free stmt set
+	$stmt = null;
+	$stmt = $conn->query("call get_meal_calories('$meal_id')");
+	$tCalories = $stmt ->fetchall(PDO::FETCH_ASSOC);
 ?>
 
 	<div class="row">
 		<div class="col-md-12">
 			<div>
 				<h2 id="result-mealName"><?= $result[0]['meal_name']; ?></h2>
-				<img id="result-mealImage" src=<?= $result[0]['meal_image']; ?> >
+				<img id="result-mealImage" src=<?= $result[0]['meal_image']; ?> style="max-height: 300px;">
 				<p id="result-mealType">Meal Type: <?= $result[0]['meal_type']; ?></p>
-				<p id="result-mealDesc">Recipe Description:</p>
+				<p id="result-mealCreationDate">Date created: <?= $result[0]['dte_created']; ?></p>
+				<p id="result-mealCreationDate">Calories: <?= $tCalories[0]['cal']; ?></p>
+				<p id="result-mealDescLabel">Recipe Description:</p>
 				<p id="result-mealDesc"><?= $result[0]['recipe_description']; ?></p>
 			</div>
 		</div>
