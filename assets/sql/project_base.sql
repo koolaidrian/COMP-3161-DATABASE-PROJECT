@@ -1,7 +1,6 @@
 -- CODE FILLED WITH STORED PROCEDURE ERRORS
 -- TABLE CREATIONS  ARE FINE
 
-/*
 DROP DATABASE IF EXISTS mealplanner;
 CREATE DATABASE mealplanner;
 USE mealplanner;
@@ -144,8 +143,6 @@ create table meal_schedule (
 	foreign key(mealplan_id) references mealplan(mealplan_id) on update cascade on delete cascade,
 	foreign key(usr_id) references myuser(usr_id) on update cascade on delete cascade
 );
-
-*/
 
 --STORED PROCEDURES
 
