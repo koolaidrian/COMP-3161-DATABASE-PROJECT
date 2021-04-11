@@ -52,9 +52,9 @@
                                     <div class="col-12 col-sm-7"><input type="text" class="form-control multisteps-form__input" id="mealName" placeholder="Meal Name" /></div>
                                     <div class="col-12 col-sm-5 mt-4 mt-sm-0"><select class="form-control multisteps-form__input" id="mealType">
                                             <optgroup label="Meal Type Group">
-                                                <option value="breakfast" selected>Breakfast</option>
-                                                <option value="lunch">Lunch</option>
-                                                <option value="dinner">Dinner</option>
+                                                <option value="Breakfast" selected>Breakfast</option>
+                                                <option value="Lunch">Lunch</option>
+                                                <option value="Dinner">Dinner</option>
                                             </optgroup>
                                         </select></div>
                                 </div>
@@ -62,9 +62,12 @@
                                     <div class="col-12"><textarea class="form-control" id="mealDescription" name="mealDesc" placeholder="Meal Description"></textarea></div>
                                 </div>
                                 <div id="input-grp-single" class="form-row mt-4">
-                                    <div class="col-12"><label>Meal Image</label><input type="file" class="form-control-file" id="mealImage" /></div>
+                                    <div class="col-12"><input type="text" class="form-control multisteps-form__input" id="mealServing" name="mealServing" placeholder="Meal Serving"/></div>
                                 </div>
-                                <div id="next-button" class="button-row d-flex mt-4"><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                                <div id="input-grp-single" class="form-row mt-4">
+                                    <div class="col-12 col-sm-7"><label>Meal Image</label><input type="file" class="form-control-file" id="mealImage" /></div>
+                                </div>
+                                <div  class="button-row d-flex mt-4"><button id="mealInfo-next-btn" class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
                             </div>
                         </div>
                         <div id="single-form-next-prev" class="multisteps-form__panel shadow p-4 rounded bg-white " data-animation="scaleIn" style="height: 488.6px;">
@@ -73,17 +76,17 @@
                                 <div id="input-grp-double-1" class="form-row mt-4">
                                     <div class="col-12 col-sm-4"><input type="number" class="form-control multisteps-form__input" id="ingredients-qty" name="ingredients-qty" placeholder="Quantity" /></div>
                                     <div class="col-12 col-sm-4 mt-4 mt-sm-0"><select class="form-control multisteps-form__input" id="ingredients-measurement" name="ingredients-measurement" placeholder="measurement">
-                                            <optgroup label="Measurements">
-                                                <option value="cup" selected>Cup</option>
+                                            <optgroup id = "measurementList" label="Measurements">
+                                                <!--<option value="cup" selected>Cup</option>
                                                 <option value="Table Spoon">Table Spoon</option>
-                                                <option value="Tea Spoon">Tea Spoon</option>
+                                                <option value="Tea Spoon">Tea Spoon</option> -->
                                             </optgroup>
                                         </select></div>
                                     <div class="col-12 col-sm-4 mt-4 mt-sm-0"><select class="form-control multisteps-form__input" id="ingredients-name" name="ingredients-name" placeholder="ingredients name">
-                                            <optgroup label="Ingredients-name">
-                                                <option value="Egg" selected>Egg</option>
+                                            <optgroup id = "ingredientList" label="Ingredients-name">
+                                                <!-- <option value="Egg" selected>Egg</option>
                                                 <option value="Bacon">Bacon</option>
-                                                <option value="Cheese">Cheese</option>
+                                                <option value="Cheese">Cheese</option> -->
                                             </optgroup>
                                         </select></div>
                                 </div>
@@ -91,9 +94,9 @@
                                     <div class="col-12"><button class="btn btn-primary" id="add-igr-btn" type="button" name="addbtn" style="margin-right: 9px;padding: 5px 16px;">Add</button><button class="btn btn-danger ml-auto" id="remove-igr-btn" type="button" name="removebtn" style="margin-left: 0px;margin-right: 0px;">Remove</button></div>
                                 </div>
                                 <div id="input-grp-single-1" class="form-row mt-4">
-                                    <div class="col-12"><label>List of Ingredients</label><textarea class="form-control" id="ingredients-list"></textarea></div>
+                                    <div class="col-12"><label>List of Ingredients</label><div class="form-control" id="ingredients-list"> For demo purposes; only work with enter 1 ingredient set</div></div>
                                 </div>
-                                <div id="next-prev-buttons" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
+                                <div  class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button id="recipe-ingredients-next-btn" class="btn btn btn-primary ml-auto js-btn-next" type="button" title="Next">Next</button></div>
                             </div>
                         </div>
                        <div id="single-form-next-prev-1" class="multisteps-form__panel shadow p-4 rounded bg-white" data-animation="scaleIn">
@@ -103,7 +106,7 @@
                                     <div class="col-12"><input type="text" class="form-control multisteps-form__input" id="rep-Instructions" placeholder="Please enter each instruction" name="rep-ingredients" style="margin-bottom: 14px;" /><button class="btn btn-primary" id="add-rep-ins-btn" type="button" name="add-rep-ins-btn" style="margin-right: 9px;padding: 5px 16px;">Add</button><button class="btn btn-danger ml-auto" id="remove-rep-ins-btn" type="button" name="remove-rep-ins-btn" style="margin-left: 0px;margin-right: 0px;">Remove</button></div>
                                 </div>
                                 <div id="input-grp-single-3" class="form-row mt-4">
-                                    <div class="col-12"><label>Recipe Instructions</label><textarea class="form-control" id="rep-instructions"></textarea></div>
+                                    <div class="col-12"><label>Recipe Instructions</label><div class="form-control" id="rep-instructions-list" placeholder="For demo purposes; only work with 1 instruction">  For demo purposes; only work with 1 instruction </div></div>
                                 </div>
                                 <div id="next-prev-buttons-1" class="button-row d-flex mt-4"><button class="btn btn btn-primary js-btn-prev" type="button" title="Prev">Prev</button><button class="btn btn-success btn btn-primary ml-auto js-btn-next" id="save-rep-btn" type="button" title="save-rep-btn">Save</button></div>
                             </div>
@@ -128,6 +131,7 @@
     </footer><!-- End: Footer Basic -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/mealUpload.js"></script>
     <script src="assets/js/Multi-step-form.js"></script>
 </body>
 

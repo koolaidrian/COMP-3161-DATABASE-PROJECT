@@ -1,0 +1,21 @@
+--Populating meal_schedule table
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000005', 18, '2003-06-30', '2006-12-29');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000014', 13, '1993-04-14', '1982-05-29');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000019', 13, '2007-06-10', '2018-03-22');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000014', 4, '1974-07-28', '2011-03-05');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000008', 10, '1974-09-07', '2019-06-08');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000015', 17, '1981-08-12', '1986-07-03');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000018', 10, '1977-12-14', '1985-10-08');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000017', 14, '1992-09-12', '2019-06-25');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000011', 3, '2008-05-07', '2002-04-13');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000020', 12, '2011-10-24', '2003-07-12');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000021', 12, '2003-06-08', '2020-05-23');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000016', 4, '1999-01-22', '2008-05-18');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000005', 9, '2010-10-29', '2018-02-27');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000018', 20, '1999-07-09', '2020-03-06');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000013', 8, '1995-10-11', '2014-06-23');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000001', 12, '2008-04-21', '2005-11-07');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000016', 3, '1988-02-14', '2015-07-14');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000024', 7, '1994-01-22', '2014-09-25');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000017', 16, '1996-11-10', '2018-12-02');
+insert into meal_schedule(mealplan_id, usr_id, startdate, enddate) values ('MP000020', 8, '2011-07-21', '2007-10-28');

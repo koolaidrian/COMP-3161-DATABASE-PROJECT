@@ -1,0 +1,26 @@
+--Populating mealplan table
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000000', 'DM000019', 'DM000029', 'DM000027', 'DM000007', 'DM000014', 'DM000004', 'DM000026');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000001', 'DM000034', 'DM000005', 'DM000001', 'DM000008', 'DM000031', 'DM000022', 'DM000007');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000002', 'DM000038', 'DM000045', 'DM000025', 'DM000011', 'DM000039', 'DM000020', 'DM000006');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000003', 'DM000010', 'DM000047', 'DM000008', 'DM000017', 'DM000026', 'DM000018', 'DM000035');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000004', 'DM000049', 'DM000026', 'DM000031', 'DM000029', 'DM000036', 'DM000013', 'DM000046');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000005', 'DM000007', 'DM000022', 'DM000030', 'DM000013', 'DM000001', 'DM000014', 'DM000031');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000006', 'DM000014', 'DM000005', 'DM000034', 'DM000044', 'DM000018', 'DM000044', 'DM000006');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000007', 'DM000028', 'DM000030', 'DM000039', 'DM000019', 'DM000041', 'DM000014', 'DM000039');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000008', 'DM000028', 'DM000028', 'DM000008', 'DM000047', 'DM000048', 'DM000004', 'DM000035');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000009', 'DM000038', 'DM000024', 'DM000037', 'DM000042', 'DM000049', 'DM000013', 'DM000039');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000010', 'DM000036', 'DM000013', 'DM000011', 'DM000035', 'DM000049', 'DM000023', 'DM000032');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000011', 'DM000047', 'DM000008', 'DM000003', 'DM000002', 'DM000029', 'DM000015', 'DM000025');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000012', 'DM000034', 'DM000005', 'DM000029', 'DM000008', 'DM000010', 'DM000027', 'DM000033');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000013', 'DM000012', 'DM000027', 'DM000019', 'DM000031', 'DM000006', 'DM000029', 'DM000023');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000014', 'DM000048', 'DM000000', 'DM000025', 'DM000003', 'DM000005', 'DM000009', 'DM000012');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000015', 'DM000025', 'DM000015', 'DM000042', 'DM000039', 'DM000018', 'DM000025', 'DM000029');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000016', 'DM000015', 'DM000011', 'DM000047', 'DM000036', 'DM000046', 'DM000048', 'DM000025');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000017', 'DM000008', 'DM000021', 'DM000044', 'DM000000', 'DM000049', 'DM000015', 'DM000006');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000018', 'DM000016', 'DM000032', 'DM000022', 'DM000000', 'DM000029', 'DM000039', 'DM000024');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000019', 'DM000002', 'DM000048', 'DM000002', 'DM000032', 'DM000015', 'DM000009', 'DM000012');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000020', 'DM000010', 'DM000015', 'DM000010', 'DM000003', 'DM000003', 'DM000013', 'DM000016');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000021', 'DM000025', 'DM000021', 'DM000025', 'DM000019', 'DM000016', 'DM000036', 'DM000039');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000022', 'DM000002', 'DM000032', 'DM000030', 'DM000013', 'DM000005', 'DM000013', 'DM000011');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000023', 'DM000014', 'DM000041', 'DM000049', 'DM000002', 'DM000025', 'DM000019', 'DM000016');
+insert into mealplan(mealplan_id, day1, day2, day3, day4, day5, day6, day7) values ('MP000024', 'DM000020', 'DM000021', 'DM000032', 'DM000007', 'DM000047', 'DM000015', 'DM000008');

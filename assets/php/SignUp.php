@@ -45,4 +45,6 @@ $userCalGoal = test_input($_POST["calGoal"]);
 
 $stmt->execute();
 
+echo $userUserName;
+
 ?>

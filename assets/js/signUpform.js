@@ -60,7 +60,7 @@ window.onload = function(){
 
           phpmysqlconnect(username.value,password.value,email.value,age,weight,height,calGoal);
 
-          location.assign("./assets/php/SignUp.php");
+         // location.assign("./assets/php/SignUp.php");
           //xhttp.open("POST",url);
 
          // signUpInfo();
@@ -90,7 +90,10 @@ window.onload = function(){
 
         if(this.readyState === this.DONE && this.status === 200){
 
-          location.assign("./index.html");
+          let response = this.responseText;
+          sessionStorage.setItem('this_user', response);
+
+          location.assign("Login.html");
 
 
         }

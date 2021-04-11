@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])){
     $user = "";
 }
 */
-$user = $_POST["username"];
+$user = $_GET["username"];
 //echo($user);
 //echo 'working';
 $host = "localhost";
@@ -34,7 +34,7 @@ function test_input($data){
     return $data;
 }
     
-//$userID = test_input($_POST["user_id"]);
+//$userID = test_input($_GET["user_id"]);
 
 
 // TO-DO: get userID from their USERNAME
@@ -60,7 +60,7 @@ if((sizeof($result)) < 1){
 			?>
 			<div class="card-group">
 			<?php foreach ($query as $meal): ?>
-				<div class="card"><img class="card-img-top w-100 d-block" src=<?= $meal['meal_image']; ?> style="max-height: 300px;">
+				<div class="card"><img style = "max-height:300px;"class="card-img-top w-100 h-100 d-block" src=<?= $meal['meal_image']; ?> >
 					<div class="card-body">
 						<h4 class="card-title"><?= $meal['meal_name']; ?></h4>
 						<p class="card-text".<?= $meal['recipe_description']; ?></p><button class='morebtn' id='<?=$meal['meal_id'] ?>' type="button" href="MealDetails.html">More</button>
