@@ -30,10 +30,9 @@ function getBreakfast(){
   
     }
     };
-    //xhttp.open("GET",url);
-    xhttp.open("GET", url + "?username=" + sessionStorage.getItem('this_user'));
+    xhttp.open("POST",url);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
+    xhttp.send("username=" + sessionStorage.getItem('this_user'));
 }
 
 function getLunch(){
@@ -49,12 +48,9 @@ function getLunch(){
   
     }
     };
-    //xhttp.open("GET",url);
-    xhttp.open("GET", url + "?username=" + sessionStorage.getItem('this_user'));
+    xhttp.open("POST",url);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
-    //xhttp.send("?username=" + sessionStorage.getItem('this_user'));
-  }
+    xhttp.send("username=" + sessionStorage.getItem('this_user'));}
 
 function getDinner(){
 	let url = "./assets/php/ViewDinnerMeals.php";
@@ -69,9 +65,6 @@ function getDinner(){
   
     }
     };
-    //xhttp.open("GET",url);
-    xhttp.open("GET", url + "?username=" + sessionStorage.getItem('this_user'));
+    xhttp.open("POST",url);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send();
-    //xhttp.send("?username=" + sessionStorage.getItem('this_user'));
-  }
+    xhttp.send("username=" + sessionStorage.getItem('this_user'));}
